@@ -1,53 +1,185 @@
-/* Custom Animations */
+/* ===== CUSTOM ANIMATIONS ===== */
+
+/* Float animation */
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
 }
 
+/* Glow animation */
 @keyframes glow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.3),
+                0 0 40px rgba(255, 0, 110, 0.1);
   }
   50% {
-    box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+    box-shadow: 0 0 40px rgba(0, 217, 255, 0.8),
+                0 0 60px rgba(255, 0, 110, 0.3);
   }
 }
 
+/* Gradient shift animation */
 @keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating particles */
+@keyframes float-particle {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translate(100px, -100px) rotate(360deg); opacity: 0; }
+}
+
+/* 3D rotate animation */
+@keyframes rotate-3d {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* Neon glow animation */
+@keyframes neon-glow {
+  0%, 100% {
+    text-shadow: 0 0 7px #00d9ff, 0 0 10px #00d9ff, 0 0 21px #00d9ff;
   }
   50% {
-    background-position: 100% 50%;
+    text-shadow: 0 0 7px #00d9ff, 0 0 20px #00d9ff, 0 0 35px #00d9ff, 0 0 50px #00d9ff;
   }
-  100% {
-    background-position: 0% 50%;
-  }
+}
+
+/* Cursor tracking effect */
+@keyframes track-cursor {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(var(--x), var(--y)) scale(0.8); }
 }
 
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
-/* Hero section enhancements */
-#hero {
-  position: relative;
+body {
+  overflow-x: hidden;
 }
 
-/* Animation utilities */
+/* ===== ANIMATION UTILITIES ===== */
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  animation: gradient-shift 3s ease infinite;
+  background-size: 200% 200%;
+}
+
+.animate-neon {
+  animation: neon-glow 2s ease-in-out infinite;
+}
+
+.animate-rotate-3d {
+  animation: rotate-3d 8s linear infinite;
+  transform-style: preserve-3d;
+}
+
+/* ===== GLASSMORPHISM EFFECT ===== */
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+}
+
+.glass-effect-strong {
+  background: rgba(0, 217, 255, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 15px;
+}
+
+/* ===== GRADIENT TEXT ===== */
+
+.gradient-text {
+  background: linear-gradient(135deg, #00d9ff 0%, #8338ec 25%, #ff006e 50%, #fb5607 75%, #06d6a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease infinite;
+  background-size: 300% 300%;
+}
+
+.gradient-text-light {
+  background: linear-gradient(90deg, #00d9ff, #00f0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== HOVER EFFECTS ===== */
+
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1),
+              box-shadow 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(0, 217, 255, 0.6),
+              0 0 60px rgba(255, 0, 110, 0.2);
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d9ff, #8338ec);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00f0ff, #ff006e);
+}
+
+/* ===== FOCUS STATES ===== */
+
+a:focus, button:focus {
+  outline: 2px solid #00d9ff;
+  outline-offset: 2px;
+}
+
+/* ===== PREFERS REDUCED MOTION ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Scroll animations */
