@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { projects } from '../data/siteData';
+import Button from './ui/Button';
+import Card from './ui/Card';
 
 export default function Projects() {
   const shouldReduceMotion = useReducedMotion();
@@ -51,7 +53,7 @@ export default function Projects() {
               variants={itemVariants}
               whileHover={shouldReduceMotion ? {} : { y: -8 }}
               transition={{ duration: 0.3 }}
-              className="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden hover:border-blue-500/50 transition-all duration-300 group"
+              className="overflow-hidden hover:border-blue-500/50 transition-all duration-300 group"
             >
               {/* Project Image */}
               <div className="h-40 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center overflow-hidden relative">
@@ -81,24 +83,16 @@ export default function Projects() {
                 </div>
 
                 {/* Links */}
-                <div className="flex gap-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 text-center px-4 py-2 bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded hover:bg-blue-500/30 transition-all duration-300 font-semibold"
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 text-center px-4 py-2 bg-slate-700/50 text-slate-300 border border-slate-600 rounded hover:bg-slate-600 transition-all duration-300 font-semibold"
-                  >
-                    Live Demo
-                  </a>
-                </div>
+                <Card className="overflow-hidden hover:border-blue-500/50 transition-all duration-300 group">
+                  <div className="flex gap-4">
+                    <Button as="a" href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                      GitHub
+                    </Button>
+                    <Button as="a" href={project.demo} target="_blank" rel="noopener noreferrer" variant="secondary" className="flex-1">
+                      Live Demo
+                    </Button>
+                  </div>
+                </Card>
               </div>
             </motion.div>
           ))}
@@ -112,14 +106,9 @@ export default function Projects() {
           transition={{ delay: 0.8 }}
           className="text-center mt-12"
         >
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-3 border-2 border-blue-400 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-lg transition-all duration-300"
-          >
+          <Button as="a" href="https://github.com" target="_blank" rel="noopener noreferrer" className="inline-block border-2 border-blue-400 text-blue-400 hover:bg-blue-500/10">
             View All Projects on GitHub →
-          </a>
+          </Button>
         </motion.div>
       </div>
     </section>

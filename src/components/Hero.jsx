@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import Button from './ui/Button';
 
 export default function Hero() {
   const [offset, setOffset] = useState(0);
@@ -79,22 +80,12 @@ export default function Hero() {
             transition={{ duration: shouldReduceMotion ? 0.1 : 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
           >
-            <motion.a
-              href="#projects"
-              whileHover={{ scale: 1.05, y: -5 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-accent to-vibrant-purple text-white font-semibold rounded-lg shadow-lg shadow-accent/50 hover:shadow-xl hover:shadow-accent/70 transition-all duration-300 cursor-pointer"
-            >
+            <Button as="a" href="#projects" className="bg-gradient-to-r from-accent to-vibrant-purple text-white shadow-lg shadow-accent/50 hover:shadow-xl">
               View My Work
-            </motion.a>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05, y: -5 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 glass-effect text-accent font-semibold rounded-lg hover:shadow-lg hover:shadow-accent/30 transition-all duration-300 cursor-pointer border border-accent/50"
-            >
+            </Button>
+            <Button as="a" href="#contact" variant="secondary" className="glass-effect text-accent border border-accent/50">
               Let's Connect
-            </motion.a>
+            </Button>
           </motion.div>
 
           {/* Scroll Indicator with enhanced animation */}

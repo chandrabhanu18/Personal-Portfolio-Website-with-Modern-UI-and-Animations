@@ -1,0 +1,20 @@
+name: Optimize Images
+
+on:
+  push:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Optimize images
+        uses: jakejarvis/optimize-images-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # directory to optimize (public assets)
+          image_folder: 'public'

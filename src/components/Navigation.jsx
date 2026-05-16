@@ -57,14 +57,9 @@ export default function Navigation() {
           </div>
 
           {/* CTA Button */}
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden md:block px-6 py-2 glass-effect border border-accent/50 rounded-lg text-accent hover:shadow-lg hover:shadow-accent/30 transition-all text-sm font-semibold"
-          >
-            Let's Talk
-          </motion.a>
+          <div className="hidden md:block">
+            <a href="#contact" className="px-6 py-2 glass-effect border border-accent/50 rounded-lg text-accent hover:shadow-lg hover:shadow-accent/30 transition-all text-sm font-semibold">Let's Talk</a>
+          </div>
 
           {/* Mobile Menu Button */}
           <motion.button
