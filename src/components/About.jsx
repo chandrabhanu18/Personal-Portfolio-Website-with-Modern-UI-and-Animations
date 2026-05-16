@@ -24,10 +24,10 @@ export default function About() {
             transition={{ duration: 0.8 }}
             data-aos="fade-right"
           >
-            <div className="relative w-64 h-64 mx-auto md:mx-0">
+            <div className="relative w-48 h-48 mx-auto md:mx-0">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-lg blur opacity-75"></div>
-              <div className="relative w-full h-full bg-slate-800 rounded-lg flex items-center justify-center">
-                <div className="text-6xl">👨‍💻</div>
+              <div className="relative w-full h-full bg-slate-800 rounded-lg flex items-center justify-center overflow-hidden">
+                <img src="/avatar.svg" alt="John Developer avatar" className="w-full h-full object-cover" loading="lazy" />
               </div>
             </div>
           </motion.div>

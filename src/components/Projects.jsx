@@ -1,45 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { projects } from '../data/siteData';
 
 export default function Projects() {
-  const projects = [
-    {
-      id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A full-featured e-commerce platform with product management, shopping cart, and payment integration. Built with React and Node.js.',
-      tech: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
-      github: 'https://github.com',
-      demo: '#',
-      image: '🛒',
-    },
-    {
-      id: 2,
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates, team collaboration features, and progress tracking.',
-      tech: ['React', 'Firebase', 'Redux', 'Material UI', 'Socket.io'],
-      github: 'https://github.com',
-      demo: '#',
-      image: '✓',
-    },
-    {
-      id: 3,
-      title: 'AI Chat Application',
-      description: 'An intelligent chat application powered by OpenAI API with natural language processing and context awareness capabilities.',
-      tech: ['React', 'OpenAI API', 'Express', 'PostgreSQL', 'WebSocket'],
-      github: 'https://github.com',
-      demo: '#',
-      image: '🤖',
-    },
-    {
-      id: 4,
-      title: 'Portfolio Website',
-      description: 'A modern, responsive portfolio website with smooth animations and parallax scrolling effects. Built with React and Framer Motion.',
-      tech: ['React', 'Vite', 'Tailwind CSS', 'Framer Motion', 'AOS'],
-      github: 'https://github.com',
-      demo: '#',
-      image: '🎨',
-    },
-  ];
+  const shouldReduceMotion = useReducedMotion();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -85,15 +49,20 @@ export default function Projects() {
             <motion.div
               key={project.id}
               variants={itemVariants}
-              whileHover={{ y: -8 }}
+              whileHover={shouldReduceMotion ? {} : { y: -8 }}
               transition={{ duration: 0.3 }}
               className="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden hover:border-blue-500/50 transition-all duration-300 group"
               data-aos="flip-left"
               data-aos-delay={index * 100}
             >
-              {/* Project Image/Icon */}
-              <div className="h-40 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center text-6xl overflow-hidden relative group-hover:scale-110 transition-transform duration-300">
-                {project.image}
+              {/* Project Image */}
+              <div className="h-40 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center overflow-hidden relative">
+                <img
+                  src={project.image}
+                  alt={project.alt || project.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
 
               {/* Project Content */}

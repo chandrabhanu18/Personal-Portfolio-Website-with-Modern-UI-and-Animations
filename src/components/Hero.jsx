@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export default function Hero() {
   const [offset, setOffset] = useState(0);
@@ -13,29 +13,35 @@ export default function Hero() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="home" className="pt-32 pb-20 px-4 relative overflow-hidden min-h-screen flex items-center">
       {/* Advanced Parallax Background Elements */}
-      <motion.div
-        className="absolute top-20 left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl"
-        style={{ y: offset * 0.5 }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-10 w-96 h-96 bg-vibrant-pink/10 rounded-full blur-3xl"
-        style={{ y: -offset * 0.3 }}
-      />
-      <motion.div
-        className="absolute top-1/2 left-1/2 w-80 h-80 bg-vibrant-purple/5 rounded-full blur-3xl"
-        style={{ y: offset * 0.2, x: -150 }}
-      />
+      {!shouldReduceMotion && (
+        <>
+          <motion.div
+            className="absolute top-20 left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl"
+            style={{ y: offset * 0.5 }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-96 h-96 bg-vibrant-pink/10 rounded-full blur-3xl"
+            style={{ y: -offset * 0.3 }}
+          />
+          <motion.div
+            className="absolute top-1/2 left-1/2 w-80 h-80 bg-vibrant-purple/5 rounded-full blur-3xl"
+            style={{ y: offset * 0.2, x: -150 }}
+          />
+        </>
+      )}
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         <div className="text-center">
           {/* Main heading with gradient animation */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: shouldReduceMotion ? 0.1 : 0.8 }}
             className="mb-6"
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text animate-gradient">
@@ -52,9 +58,9 @@ export default function Hero() {
 
           {/* Subtitle with enhanced styling */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: shouldReduceMotion ? 0.1 : 0.8, delay: 0.2 }}
           >
             <p className="text-xl md:text-2xl bg-gradient-to-r from-accent-light via-vibrant-green to-accent bg-clip-text text-transparent mb-6 font-semibold">
               Full Stack Developer | Creative Problem Solver | Tech Innovator
@@ -68,9 +74,9 @@ export default function Hero() {
 
           {/* CTA Buttons with enhanced design */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: shouldReduceMotion ? 0.1 : 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
           >
             <motion.a

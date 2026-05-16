@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { siteMeta } from '../data/siteData';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -30,21 +31,21 @@ export default function Contact() {
   const contactLinks = [
     {
       name: 'Email',
-      href: 'mailto:john@example.com',
+      href: `mailto:${siteMeta.email}`,
       icon: '📧',
-      label: 'john@example.com',
+      label: siteMeta.email,
     },
     {
       name: 'GitHub',
-      href: 'https://github.com',
+      href: siteMeta.github,
       icon: '🐙',
-      label: 'github.com/yourprofile',
+      label: siteMeta.github.replace('https://', ''),
     },
     {
       name: 'LinkedIn',
-      href: 'https://linkedin.com',
+      href: siteMeta.linkedin,
       icon: '💼',
-      label: 'linkedin.com/in/yourprofile',
+      label: siteMeta.linkedin.replace('https://', ''),
     },
     {
       name: 'Twitter',

@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuButtonRef = React.useRef(null);
+  const firstLinkRef = React.useRef(null);
 
   const navItems = [
     { label: 'Home', id: 'home' },
@@ -66,6 +68,10 @@ export default function Navigation() {
 
           {/* Mobile Menu Button */}
           <motion.button
+            ref={menuButtonRef}
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
             className="md:hidden flex flex-col space-y-1.5"
             onClick={() => setIsOpen(!isOpen)}
             whileTap={{ scale: 0.95 }}
@@ -87,6 +93,7 @@ export default function Navigation() {
 
         {/* Mobile Navigation */}
         <motion.div
+          id="mobile-menu"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? 'auto' : 0 }}
           transition={{ duration: 0.3 }}
@@ -102,6 +109,7 @@ export default function Navigation() {
                 transition={{ delay: index * 0.1 }}
                 className="block text-slate-300 hover:text-accent py-2 px-4 rounded transition-colors duration-300"
                 onClick={() => setIsOpen(false)}
+                ref={index === 0 ? firstLinkRef : null}
               >
                 {item.label}
               </motion.a>
@@ -118,7 +126,37 @@ export default function Navigation() {
             </motion.a>
           </div>
         </motion.div>
+
+        {/* Focus management for mobile menu */}
+        {isOpen && (
+          <FocusTrap
+            onDeactivate={() => {
+              setIsOpen(false);
+              menuButtonRef.current?.focus();
+            }}
+            initialFocusRef={firstLinkRef}
+          />
+        )}
       </div>
     </nav>
   );
+}
+
+// Minimal focus trap component (no external dependencies)
+function FocusTrap({ onDeactivate, initialFocusRef }) {
+  React.useEffect(() => {
+    const prev = document.activeElement;
+    if (initialFocusRef && initialFocusRef.current) initialFocusRef.current.focus();
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        onDeactivate && onDeactivate();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      if (prev && prev.focus) prev.focus();
+    };
+  }, []);
+  return null;
 }

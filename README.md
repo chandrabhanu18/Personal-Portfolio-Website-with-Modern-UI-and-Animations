@@ -19,7 +19,7 @@ A modern, fully responsive personal portfolio website built with React, Vite, an
 2. **Hero** - Eye-catching intro with parallax background elements
 3. **About** - Personal bio and key information
 4. **Skills** - Visual skill display with progress bars (3 categories)
-5. **Projects** - Showcasing 4 featured projects with descriptions and tech stacks
+5. **Projects** - Showcasing 3+ featured projects with descriptions and tech stacks (replace placeholder data in `src/data/siteData.js` with your real project URLs and images)
 6. **Contact** - Contact form and social media links
 7. **Footer** - Quick links and copyright information
 
@@ -226,7 +226,7 @@ John Developer
 
 ---
 
-**Live Demo**: [Visit Portfolio](#)
-**GitHub Repository**: https://github.com/yourusername/portfolio
+**Live Demo**: Replace with your deployment URL after publishing
+**GitHub Repository**: Replace with your repository URL
 
 For questions or suggestions, feel free to reach out!
