@@ -2,24 +2,16 @@ import React, { useState } from 'react';
 import { siteMeta } from '../data/siteData';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate form submission
     setSubmitted(true);
     setTimeout(() => {
       setFormData({ name: '', email: '', message: '' });
@@ -28,30 +20,10 @@ export default function Contact() {
   };
 
   const contactLinks = [
-    {
-      name: 'Email',
-      href: `mailto:${siteMeta.email}`,
-      icon: '📧',
-      label: siteMeta.email,
-    },
-    {
-      name: 'GitHub',
-      href: siteMeta.github,
-      icon: '🐙',
-      label: siteMeta.github.replace('https://', ''),
-    },
-    {
-      name: 'LinkedIn',
-      href: siteMeta.linkedin,
-      icon: '💼',
-      label: siteMeta.linkedin.replace('https://', ''),
-    },
-    {
-      name: 'Twitter',
-      href: 'https://twitter.com',
-      icon: '🐦',
-      label: '@yourhandle',
-    },
+    { name: 'Email', href: `mailto:${siteMeta.email}`, icon: '📧', label: siteMeta.email },
+    { name: 'GitHub', href: siteMeta.github, icon: '🐙', label: siteMeta.github.replace('https://', '') },
+    { name: 'LinkedIn', href: siteMeta.linkedin, icon: '💼', label: siteMeta.linkedin.replace('https://', '') },
+    { name: 'Twitter', href: 'https://twitter.com', icon: '🐦', label: '@yourhandle' },
   ];
 
   return (
@@ -64,13 +36,10 @@ export default function Contact() {
         </p>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Name
-                </label>
+                <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
                 <input
                   type="text"
                   id="name"
@@ -84,9 +53,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
-                  Email
-                </label>
+                <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
                 <input
                   type="email"
                   id="email"
@@ -100,9 +67,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
-                  Message
-                </label>
+                <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
                 <textarea
                   id="message"
                   name="message"
@@ -124,17 +89,16 @@ export default function Contact() {
               </button>
             </form>
           </div>
+
           <div className="flex flex-col justify-center">
-            className="flex flex-col justify-center"
-          >
             <h3 className="text-2xl font-bold mb-8">Connect With Me</h3>
+            <div className="space-y-4">
+              {contactLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block p-4 bg-slate-800/50 border border-slate-700 rounded-lg hover:border-blue-500/50 transition-all duration-300 group"
-                >
                   className="block p-4 bg-slate-800/50 border border-slate-700 rounded-lg hover:border-blue-500/50 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-4">
@@ -144,17 +108,16 @@ export default function Contact() {
                       <p className="text-slate-400 group-hover:text-blue-400 transition-colors">{link.label}</p>
                     </div>
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            {/* Additional Info */}
             <div className="mt-8 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
               <p className="text-slate-300">
                 💡 <span className="font-semibold">Quick Response:</span> I typically respond to emails within 24 hours.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
