@@ -52,8 +52,6 @@ export default function Projects() {
               whileHover={shouldReduceMotion ? {} : { y: -8 }}
               transition={{ duration: 0.3 }}
               className="bg-slate-800/50 rounded-lg border border-slate-700 overflow-hidden hover:border-blue-500/50 transition-all duration-300 group"
-              data-aos="flip-left"
-              data-aos-delay={index * 100}
             >
               {/* Project Image */}
               <div className="h-40 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center overflow-hidden relative">

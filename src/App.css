@@ -193,8 +193,7 @@ a:focus, button:focus {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Gradient text */
+/* Gradient text (single definition) */
 .gradient-text {
   background: linear-gradient(135deg, #60a5fa, #a78bfa, #ec4899);
   background-size: 200% 200%;
@@ -216,7 +215,7 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar (single definition) */
 ::-webkit-scrollbar {
   width: 10px;
 }

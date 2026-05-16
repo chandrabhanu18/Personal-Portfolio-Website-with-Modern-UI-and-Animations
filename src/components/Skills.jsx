@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ProgressBar from './ui/ProgressBar';
 
 export default function Skills() {
   const skillCategories = [
@@ -130,17 +131,8 @@ export default function Skills() {
                       </div>
 
                       {/* Progress bar */}
-                      <div className="w-full bg-slate-800/50 rounded-full h-2.5 overflow-hidden border border-slate-700/50">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          transition={{ duration: 1.2, ease: 'easeOut', delay: index * 0.1 }}
-                          viewport={{ once: true }}
-                          className={`h-full bg-gradient-to-r ${category.color} shadow-lg`}
-                          style={{
-                            boxShadow: `0 0 20px rgba(0, 217, 255, 0.5)`,
-                          }}
-                        />
+                      <div>
+                        <ProgressBar level={skill.level} colorClass={category.color} />
                       </div>
                     </motion.div>
                   ))}

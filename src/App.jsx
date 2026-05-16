@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -17,13 +15,8 @@ import './App.css';
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100,
-    });
-  }, []);
+  // AOS removed in favor of Framer Motion; keep empty effect placeholder if needed
+  useEffect(() => {}, []);
 
   const shouldReduceMotion = useReducedMotion();
 

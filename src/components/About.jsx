@@ -22,7 +22,7 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            data-aos="fade-right"
+            
           >
             <div className="relative w-48 h-48 mx-auto md:mx-0">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-lg blur opacity-75"></div>

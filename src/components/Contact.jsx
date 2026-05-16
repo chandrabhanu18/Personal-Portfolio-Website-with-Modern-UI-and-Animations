@@ -85,7 +85,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            data-aos="fade-right"
+          
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -154,7 +154,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            data-aos="fade-left"
+            
             className="flex flex-col justify-center"
           >
             <h3 className="text-2xl font-bold mb-8">Connect With Me</h3>
