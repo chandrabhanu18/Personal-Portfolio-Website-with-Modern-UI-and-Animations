@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { projects } from '../data/siteData';
 import Button from './ui/Button';
-import Card from './ui/Card';
+import ProjectCard from './ui/ProjectCard';
 
 export default function Projects() {
   const shouldReduceMotion = useReducedMotion();
@@ -48,52 +48,8 @@ export default function Projects() {
           viewport={{ once: true }}
         >
           {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              variants={itemVariants}
-              whileHover={shouldReduceMotion ? {} : { y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden hover:border-blue-500/50 transition-all duration-300 group"
-            >
-              {/* Project Image */}
-              <div className="h-40 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center overflow-hidden relative">
-                <img
-                  src={project.image}
-                  alt={project.alt || project.title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Project Content */}
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-3 text-slate-100">{project.title}</h3>
-                <p className="text-slate-400 mb-4 leading-relaxed">{project.description}</p>
-
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-slate-700/50 text-slate-300 text-sm rounded-full border border-slate-600"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Links */}
-                <Card className="overflow-hidden hover:border-blue-500/50 transition-all duration-300 group">
-                  <div className="flex gap-4">
-                    <Button as="a" href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                      GitHub
-                    </Button>
-                    <Button as="a" href={project.demo} target="_blank" rel="noopener noreferrer" variant="secondary" className="flex-1">
-                      Live Demo
-                    </Button>
-                  </div>
-                </Card>
-              </div>
+            <motion.div key={project.id} variants={itemVariants} whileHover={shouldReduceMotion ? {} : { y: -8 }} transition={{ duration: 0.3 }} className="group">
+              <ProjectCard project={project} />
             </motion.div>
           ))}
         </motion.div>
