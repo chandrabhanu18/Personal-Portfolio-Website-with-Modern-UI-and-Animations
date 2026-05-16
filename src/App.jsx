@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Statistics from './components/Statistics';
-import Timeline from './components/Timeline';
-import Testimonials from './components/Testimonials';
+const About = lazy(() => import('./components/About'));
+const Skills = lazy(() => import('./components/Skills'));
+const Projects = lazy(() => import('./components/Projects'));
+const Statistics = lazy(() => import('./components/Statistics'));
+const Timeline = lazy(() => import('./components/Timeline'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './App.css';
@@ -68,12 +68,20 @@ function App() {
       <div className="relative z-10">
         <Navigation />
         <Hero />
-        <About />
-        <Skills />
-        <Statistics />
-        <Projects />
-        <Timeline />
-        <Testimonials />
+        <Suspense
+          fallback={
+            <div className="py-20">
+              <div className="max-w-6xl mx-auto text-center text-slate-400">Loading content…</div>
+            </div>
+          }
+        >
+          <About />
+          <Skills />
+          <Statistics />
+          <Projects />
+          <Timeline />
+          <Testimonials />
+        </Suspense>
         <Contact />
         <Footer />
       </div>
