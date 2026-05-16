@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
 import Navigation from './components/Navigation';
 const Hero = lazy(() => import('./components/Hero'));
+const LazyAnimatedBackground = lazy(() => import('./components/AnimatedBackground'));
 const About = lazy(() => import('./components/About'));
 const Skills = lazy(() => import('./components/Skills'));
 const Projects = lazy(() => import('./components/Projects'));
@@ -29,40 +29,10 @@ function App() {
 
   return (
     <div className="bg-gradient-to-b from-primary via-secondary to-primary text-slate-100 min-h-screen overflow-hidden">
-      {/* Animated background elements */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        {!shouldReduceMotion && (
-          <>
-            <motion.div
-              className="absolute w-96 h-96 bg-accent/5 rounded-full blur-3xl"
-              animate={{
-                x: [0, 50, 0],
-                y: [0, 30, 0],
-              }}
-              transition={{ duration: 10, repeat: Infinity }}
-              style={{ top: '10%', left: '10%' }}
-            />
-            <motion.div
-              className="absolute w-96 h-96 bg-vibrant-pink/5 rounded-full blur-3xl"
-              animate={{
-                x: [0, -50, 0],
-                y: [0, -30, 0],
-              }}
-              transition={{ duration: 12, repeat: Infinity }}
-              style={{ bottom: '10%', right: '10%' }}
-            />
-            <motion.div
-              className="absolute w-72 h-72 bg-vibrant-purple/5 rounded-full blur-3xl"
-              animate={{
-                x: [0, 30, 0],
-                y: [0, -50, 0],
-              }}
-              transition={{ duration: 15, repeat: Infinity }}
-              style={{ top: '50%', right: '20%' }}
-            />
-          </>
-        )}
-      </div>
+      {/* Animated background elements (lazy) */}
+      <Suspense fallback={null}>
+        <LazyAnimatedBackground />
+      </Suspense>
 
       {/* Main content */}
       <div className="relative z-10">
