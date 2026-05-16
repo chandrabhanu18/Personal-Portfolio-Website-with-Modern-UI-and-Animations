@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Navigation from './components/Navigation';
-import Hero from './components/Hero';
+const Hero = lazy(() => import('./components/Hero'));
 const About = lazy(() => import('./components/About'));
 const Skills = lazy(() => import('./components/Skills'));
 const Projects = lazy(() => import('./components/Projects'));
