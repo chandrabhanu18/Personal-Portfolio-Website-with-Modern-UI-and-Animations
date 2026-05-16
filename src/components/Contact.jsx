@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { siteMeta } from '../data/siteData';
 
 export default function Contact() {
@@ -58,35 +57,15 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold mb-4 text-center"
-        >
-          Get In Touch
-        </motion.h2>
+        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">Get In Touch</h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-center text-slate-400 mb-12 max-w-2xl mx-auto"
-        >
+        <p className="text-center text-slate-400 mb-12 max-w-2xl mx-auto">
           I'm always interested in hearing about new projects and opportunities. Feel free to reach out!
-        </motion.p>
+        </p>
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          
-          >
+          <div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -136,40 +115,26 @@ export default function Contact() {
                 />
               </div>
 
-              <motion.button
+              <button
                 type="submit"
                 disabled={submitted}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
                 className="w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-green-500 text-white font-semibold rounded-lg transition-all duration-300"
               >
                 {submitted ? '✓ Message Sent!' : 'Send Message'}
-              </motion.button>
+              </button>
             </form>
-          </motion.div>
-
-          {/* Contact Links */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            
+          </div>
+          <div className="flex flex-col justify-center">
             className="flex flex-col justify-center"
           >
             <h3 className="text-2xl font-bold mb-8">Connect With Me</h3>
-            <div className="space-y-4">
-              {contactLinks.map((link, index) => (
-                <motion.a
+                <a
                   key={link.name}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ x: 10 }}
+                  className="block p-4 bg-slate-800/50 border border-slate-700 rounded-lg hover:border-blue-500/50 transition-all duration-300 group"
+                >
                   className="block p-4 bg-slate-800/50 border border-slate-700 rounded-lg hover:border-blue-500/50 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-4">
@@ -184,17 +149,11 @@ export default function Contact() {
             </div>
 
             {/* Additional Info */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-              className="mt-8 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg"
-            >
+            <div className="mt-8 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
               <p className="text-slate-300">
                 💡 <span className="font-semibold">Quick Response:</span> I typically respond to emails within 24 hours.
               </p>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
