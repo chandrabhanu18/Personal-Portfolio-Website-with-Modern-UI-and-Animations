@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { projects } from '../data/siteData';
+import { projects, siteMeta } from '../data/siteData';
 import Button from './ui/Button';
 import ProjectCard from './ui/ProjectCard';
 
@@ -62,7 +62,7 @@ export default function Projects() {
           transition={{ delay: 0.8 }}
           className="text-center mt-12"
         >
-          <Button as="a" href="https://github.com" target="_blank" rel="noopener noreferrer" className="inline-block border-2 border-blue-400 text-blue-400 hover:bg-blue-500/10">
+          <Button as="a" href={siteMeta.github} target="_blank" rel="noopener noreferrer" className="inline-block border-2 border-blue-400 text-blue-400 hover:bg-blue-500/10">
             View All Projects on GitHub →
           </Button>
         </motion.div>

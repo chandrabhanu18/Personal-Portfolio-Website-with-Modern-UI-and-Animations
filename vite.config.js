@@ -4,5 +4,10 @@ import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), visualizer({ filename: 'bundle-report.html', template: 'treemap', open: false, gzipSize: true, brotliSize: true })],
+  plugins: [
+    react(),
+    process.env.ANALYZE === 'true'
+      ? visualizer({ filename: 'bundle-report.html', template: 'treemap', open: false, gzipSize: true, brotliSize: true })
+      : null,
+  ].filter(Boolean),
 })

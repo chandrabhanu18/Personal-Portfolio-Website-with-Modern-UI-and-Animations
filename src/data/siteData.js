@@ -5,6 +5,7 @@ export const siteMeta = {
   email: 'john@example.com', // replace with your real email
   github: 'https://github.com/yourprofile', // replace
   linkedin: 'https://linkedin.com/in/yourprofile', // replace
+  twitter: 'https://twitter.com/yourprofile', // replace
 };
 
 export const projects = [

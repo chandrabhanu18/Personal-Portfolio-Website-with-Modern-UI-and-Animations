@@ -38,7 +38,6 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            data-aos="fade-left"
           >
             <div className="space-y-4">
               <p className="text-lg text-slate-300 leading-relaxed">

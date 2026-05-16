@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { siteMeta } from '../data/siteData';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -63,7 +64,7 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-4 text-blue-400">Follow Me</h3>
             <div className="flex gap-4">
               <a
-                href="https://github.com"
+                href={siteMeta.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-blue-400 transition-colors text-xl"
@@ -71,7 +72,7 @@ export default function Footer() {
                 🐙
               </a>
               <a
-                href="https://linkedin.com"
+                href={siteMeta.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-blue-400 transition-colors text-xl"
@@ -79,7 +80,7 @@ export default function Footer() {
                 💼
               </a>
               <a
-                href="https://twitter.com"
+                href={siteMeta.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-blue-400 transition-colors text-xl"
@@ -87,7 +88,7 @@ export default function Footer() {
                 🐦
               </a>
               <a
-                href="mailto:john@example.com"
+                href={`mailto:${siteMeta.email}`}
                 className="text-slate-400 hover:text-blue-400 transition-colors text-xl"
               >
                 📧

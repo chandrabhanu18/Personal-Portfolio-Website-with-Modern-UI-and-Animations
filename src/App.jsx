@@ -15,9 +15,6 @@ import './App.css';
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // AOS removed in favor of Framer Motion; keep empty effect placeholder if needed
-  useEffect(() => {}, []);
-
   const shouldReduceMotion = useReducedMotion();
 
   // Track cursor for interactive effects
