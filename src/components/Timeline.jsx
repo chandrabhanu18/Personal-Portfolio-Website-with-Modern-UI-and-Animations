@@ -1,5 +1,4 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 
 export default function Timeline() {
   const milestones = [
@@ -61,85 +60,85 @@ export default function Timeline() {
     },
   };
 
+  const [FM, setFM] = useState(null);
+  useEffect(() => {
+    let mounted = true;
+    import('framer-motion').then((mod) => mounted && setFM(mod)).catch(() => {});
+    return () => (mounted = false);
+  }, []);
+
   return (
     <section className="py-20 px-4 relative overflow-hidden">
       <div className="max-w-4xl mx-auto">
         {/* Section heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-            My Journey
-          </h2>
-          <p className="text-lg text-slate-400">
-            From beginner to expert: A timeline of growth and achievement
-          </p>
-        </motion.div>
+        {FM ? (
+          <FM.motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true, margin: '-100px' }} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">My Journey</h2>
+            <p className="text-lg text-slate-400">From beginner to expert: A timeline of growth and achievement</p>
+          </FM.motion.div>
+        ) : (
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">My Journey</h2>
+            <p className="text-lg text-slate-400">From beginner to expert: A timeline of growth and achievement</p>
+          </div>
+        )}
 
         {/* Timeline */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="relative"
-        >
-          {/* Central line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-accent via-vibrant-purple to-vibrant-pink opacity-30" />
-
-          {/* Timeline items */}
-          <div className="space-y-12">
-            {milestones.map((milestone, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className={`flex items-center gap-8 ${
-                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                }`}
-              >
-                {/* Content */}
-                <div className="flex-1">
-                  <div className="glass-effect p-6 rounded-xl hover-glow transition-all">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-2xl">{milestone.icon}</span>
-                      <span className="text-sm font-bold text-accent">{milestone.year}</span>
+        {FM ? (
+          <FM.motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} className="relative">
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-accent via-vibrant-purple to-vibrant-pink opacity-30" />
+            <div className="space-y-12">
+              {milestones.map((milestone, index) => (
+                <FM.motion.div key={index} variants={itemVariants} className={`flex items-center gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                  <div className="flex-1">
+                    <div className="glass-effect p-6 rounded-xl hover-glow transition-all">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-2xl">{milestone.icon}</span>
+                        <span className="text-sm font-bold text-accent">{milestone.year}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-accent-light mb-2">{milestone.title}</h3>
+                      <p className="text-slate-400 text-sm leading-relaxed">{milestone.description}</p>
                     </div>
-                    <h3 className="text-xl font-bold text-accent-light mb-2">
-                      {milestone.title}
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {milestone.description}
-                    </p>
                   </div>
+
+                  <FM.motion.div whileInView={{ scale: [1, 1.3, 1] }} transition={{ duration: 0.5, repeat: 2 }} viewport={{ once: true }} className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-accent to-vibrant-pink shadow-lg shadow-accent/50" />
+
+                  <div className="flex-1" />
+                </FM.motion.div>
+              ))}
+            </div>
+          </FM.motion.div>
+        ) : (
+          <div className="relative">
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-accent via-vibrant-purple to-vibrant-pink opacity-30" />
+            <div className="space-y-12">
+              {milestones.map((milestone, index) => (
+                <div key={index} className={`flex items-center gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                  <div className="flex-1">
+                    <div className="glass-effect p-6 rounded-xl hover-glow transition-all">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-2xl">{milestone.icon}</span>
+                        <span className="text-sm font-bold text-accent">{milestone.year}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-accent-light mb-2">{milestone.title}</h3>
+                      <p className="text-slate-400 text-sm leading-relaxed">{milestone.description}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-accent to-vibrant-pink shadow-lg shadow-accent/50" />
+                  <div className="flex-1" />
                 </div>
-
-                {/* Center dot */}
-                <motion.div
-                  whileInView={{ scale: [1, 1.3, 1] }}
-                  transition={{ duration: 0.5, repeat: 2 }}
-                  viewport={{ once: true }}
-                  className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-accent to-vibrant-pink shadow-lg shadow-accent/50"
-                />
-
-                {/* Empty space for alignment */}
-                <div className="flex-1" />
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
-        </motion.div>
+        )}
 
         {/* Bottom accent */}
-        <motion.div
-          initial={{ scaleY: 0 }}
-          whileInView={{ scaleY: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="h-1 bg-gradient-to-r from-accent via-vibrant-purple to-vibrant-pink mt-16 rounded-full origin-top"
-        />
+        {FM ? (
+          <FM.motion.div initial={{ scaleY: 0 }} whileInView={{ scaleY: 1 }} transition={{ duration: 0.8, delay: 0.5 }} viewport={{ once: true }} className="h-1 bg-gradient-to-r from-accent via-vibrant-purple to-vibrant-pink mt-16 rounded-full origin-top" />
+        ) : (
+          <div className="h-1 bg-gradient-to-r from-accent via-vibrant-purple to-vibrant-pink mt-16 rounded-full origin-top" />
+        )}
       </div>
     </section>
   );

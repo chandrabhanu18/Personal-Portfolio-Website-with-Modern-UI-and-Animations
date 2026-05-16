@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 
 export default function Statistics() {
   const [counts, setCounts] = useState({ projects: 0, clients: 0, experience: 0, success: 0 });
@@ -53,81 +52,70 @@ export default function Statistics() {
     },
   };
 
+  const [FM, setFM] = useState(null);
+  useEffect(() => {
+    let mounted = true;
+    import('framer-motion').then((mod) => mounted && setFM(mod)).catch(() => {});
+    return () => (mounted = false);
+  }, []);
+
   return (
     <section className="py-20 px-4 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Section heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-            By The Numbers
-          </h2>
-          <p className="text-lg text-slate-400">
-            Achievements and milestones that define my journey
-          </p>
-        </motion.div>
+        {FM ? (
+          <FM.motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true, margin: '-100px' }} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">By The Numbers</h2>
+            <p className="text-lg text-slate-400">Achievements and milestones that define my journey</p>
+          </FM.motion.div>
+        ) : (
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">By The Numbers</h2>
+            <p className="text-lg text-slate-400">Achievements and milestones that define my journey</p>
+          </div>
+        )}
 
         {/* Stats grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group"
-            >
-              <div className="glass-effect-strong p-8 rounded-2xl text-center hover-glow hover-lift h-full transition-all">
-                {/* Icon */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                  className="text-5xl mb-4 inline-block"
-                >
-                  {stat.icon}
-                </motion.div>
-
-                {/* Value */}
-                <div className="mb-4">
-                  <span className="text-5xl font-bold gradient-text-light">
-                    {stat.value}
-                  </span>
-                  <span className="text-2xl text-accent ml-1">{stat.suffix}</span>
+        {FM ? (
+          <FM.motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.map((stat, index) => (
+              <FM.motion.div key={index} variants={itemVariants} className="group">
+                <div className="glass-effect-strong p-8 rounded-2xl text-center hover-glow hover-lift h-full transition-all">
+                  <FM.motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }} className="text-5xl mb-4 inline-block">{stat.icon}</FM.motion.div>
+                  <div className="mb-4">
+                    <span className="text-5xl font-bold gradient-text-light">{stat.value}</span>
+                    <span className="text-2xl text-accent ml-1">{stat.suffix}</span>
+                  </div>
+                  <p className="text-slate-300 text-sm font-medium">{stat.label}</p>
+                  <FM.motion.div initial={{ width: 0 }} whileInView={{ width: '100%' }} transition={{ duration: 0.8, delay: 0.2 }} viewport={{ once: true }} className="h-0.5 bg-gradient-to-r from-accent via-vibrant-pink to-vibrant-purple mt-4 mx-auto" />
                 </div>
-
-                {/* Label */}
-                <p className="text-slate-300 text-sm font-medium">{stat.label}</p>
-
-                {/* Animated underline */}
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: '100%' }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="h-0.5 bg-gradient-to-r from-accent via-vibrant-pink to-vibrant-purple mt-4 mx-auto"
-                />
+              </FM.motion.div>
+            ))}
+          </FM.motion.div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.map((stat, index) => (
+              <div key={index} className="group">
+                <div className="glass-effect-strong p-8 rounded-2xl text-center hover-glow hover-lift h-full transition-all">
+                  <div className="text-5xl mb-4 inline-block">{stat.icon}</div>
+                  <div className="mb-4">
+                    <span className="text-5xl font-bold gradient-text-light">{stat.value}</span>
+                    <span className="text-2xl text-accent ml-1">{stat.suffix}</span>
+                  </div>
+                  <p className="text-slate-300 text-sm font-medium">{stat.label}</p>
+                  <div className="h-0.5 bg-gradient-to-r from-accent via-vibrant-pink to-vibrant-purple mt-4 mx-auto" />
+                </div>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        )}
 
         {/* Bottom accent line */}
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: '100%' }}
-          transition={{ duration: 1, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="h-1 bg-gradient-to-r from-accent via-vibrant-pink to-vibrant-purple mt-16 rounded-full opacity-50"
-        />
+        {FM ? (
+          <FM.motion.div initial={{ width: 0 }} whileInView={{ width: '100%' }} transition={{ duration: 1, delay: 0.5 }} viewport={{ once: true }} className="h-1 bg-gradient-to-r from-accent via-vibrant-pink to-vibrant-purple mt-16 rounded-full opacity-50" />
+        ) : (
+          <div className="h-1 bg-gradient-to-r from-accent via-vibrant-pink to-vibrant-purple mt-16 rounded-full opacity-50" />
+        )}
       </div>
     </section>
   );
