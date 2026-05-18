@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://johndeveloper.dev/sitemap.xml
