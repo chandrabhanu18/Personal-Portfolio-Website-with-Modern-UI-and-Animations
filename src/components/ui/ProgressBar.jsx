@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function ProgressBar({ level = 50, colorClass = 'from-accent to-vibrant-purple' }) {
   const prefersReducedMotion = () =>
     typeof window !== 'undefined' &&

@@ -1,4 +1,3 @@
-import React from 'react';
 import { siteMeta } from '../data/siteData';
 
 export default function Footer() {

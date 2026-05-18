@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { siteMeta } from '../data/siteData';
 
 export default function Contact() {

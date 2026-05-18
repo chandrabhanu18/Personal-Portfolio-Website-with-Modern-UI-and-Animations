@@ -127,6 +127,6 @@ function FocusTrap({ onDeactivate, initialFocusRef }) {
       document.removeEventListener('keydown', onKey);
       if (prev && prev.focus) prev.focus();
     };
-  }, []);
+  }, [onDeactivate, initialFocusRef]);
   return null;
 }

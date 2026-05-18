@@ -1,33 +1,55 @@
-import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 export default function AnimatedBackground() {
-  const shouldReduceMotion = useReducedMotion();
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
 
-  if (shouldReduceMotion) return null;
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduce) return;
 
+    const a1 = ref1.current?.animate(
+      [
+        { transform: 'translate(0px, 0px)' },
+        { transform: 'translate(50px, 30px)' },
+        { transform: 'translate(0px, 0px)' },
+      ],
+      { duration: 10000, iterations: Infinity, easing: 'ease-in-out' }
+    );
+
+    const a2 = ref2.current?.animate(
+      [
+        { transform: 'translate(0px, 0px)' },
+        { transform: 'translate(-50px, -30px)' },
+        { transform: 'translate(0px, 0px)' },
+      ],
+      { duration: 12000, iterations: Infinity, easing: 'ease-in-out' }
+    );
+
+    const a3 = ref3.current?.animate(
+      [
+        { transform: 'translate(0px, 0px)' },
+        { transform: 'translate(30px, -50px)' },
+        { transform: 'translate(0px, 0px)' },
+      ],
+      { duration: 15000, iterations: Infinity, easing: 'ease-in-out' }
+    );
+
+    return () => {
+      a1?.cancel();
+      a2?.cancel();
+      a3?.cancel();
+    };
+  }, []);
+
+  // Respect reduced motion via early return in effect; render static structure otherwise
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      <>
-        <motion.div
-          className="absolute w-96 h-96 bg-accent/5 rounded-full blur-3xl"
-          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          style={{ top: '10%', left: '10%' }}
-        />
-        <motion.div
-          className="absolute w-96 h-96 bg-vibrant-pink/5 rounded-full blur-3xl"
-          animate={{ x: [0, -50, 0], y: [0, -30, 0] }}
-          transition={{ duration: 12, repeat: Infinity }}
-          style={{ bottom: '10%', right: '10%' }}
-        />
-        <motion.div
-          className="absolute w-72 h-72 bg-vibrant-purple/5 rounded-full blur-3xl"
-          animate={{ x: [0, 30, 0], y: [0, -50, 0] }}
-          transition={{ duration: 15, repeat: Infinity }}
-          style={{ top: '50%', right: '20%' }}
-        />
-      </>
+      <div ref={ref1} className="absolute w-96 h-96 bg-accent/5 rounded-full blur-3xl" style={{ top: '10%', left: '10%' }} />
+      <div ref={ref2} className="absolute w-96 h-96 bg-vibrant-pink/5 rounded-full blur-3xl" style={{ bottom: '10%', right: '10%' }} />
+      <div ref={ref3} className="absolute w-72 h-72 bg-vibrant-purple/5 rounded-full blur-3xl" style={{ top: '50%', right: '20%' }} />
     </div>
   );
 }

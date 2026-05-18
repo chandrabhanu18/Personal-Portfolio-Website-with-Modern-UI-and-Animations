@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import Navigation from './components/Navigation';
 const Hero = lazy(() => import('./components/Hero'));
 const LazyAnimatedBackground = lazy(() => import('./components/AnimatedBackground'));
@@ -13,19 +13,7 @@ import Footer from './components/Footer';
 import './App.css';
 
 function App() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const shouldReduceMotion = useReducedMotion();
-
-  // Track cursor for interactive effects
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  // (cursor tracking removed — not currently used)
 
   return (
     <div className="bg-gradient-to-b from-primary via-secondary to-primary text-slate-100 min-h-screen overflow-hidden">

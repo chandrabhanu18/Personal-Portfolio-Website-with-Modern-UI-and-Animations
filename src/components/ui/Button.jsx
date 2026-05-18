@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Button({ children, variant = 'primary', className = '', as: Component = 'button', ...props }) {
   const base = 'inline-flex items-center justify-center rounded-lg font-semibold transition-all focus:outline-none focus-visible:ring-2';
   const variants = {

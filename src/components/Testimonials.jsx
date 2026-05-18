@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function Testimonials() {
   const testimonials = [
@@ -52,66 +52,33 @@ export default function Testimonials() {
     },
   };
 
-  const [FM, setFM] = useState(null);
-  useEffect(() => {
-    let mounted = true;
-    import('framer-motion').then((mod) => mounted && setFM(mod)).catch(() => {});
-    return () => (mounted = false);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <section className="py-20 px-4 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Section heading */}
-        {FM ? (
-          <FM.motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true, margin: '-100px' }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Client Testimonials</h2>
-            <p className="text-lg text-slate-400">What clients and collaborators say about working with me</p>
-          </FM.motion.div>
-        ) : (
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Client Testimonials</h2>
-            <p className="text-lg text-slate-400">What clients and collaborators say about working with me</p>
-          </div>
-        )}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Client Testimonials</h2>
+          <p className="text-lg text-slate-400">What clients and collaborators say about working with me</p>
+        </div>
 
         {/* Testimonials grid */}
-        {FM ? (
-          <FM.motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {testimonials.map((testimonial, index) => (
-              <FM.motion.div key={index} variants={itemVariants} className="group">
-                <div className="glass-effect p-6 rounded-xl hover-glow hover-lift h-full transition-all">
-                  <div className="mb-4 flex gap-1">{[...Array(testimonial.rating)].map((_, i) => (<span key={i} className="text-lg text-accent">⭐</span>))}</div>
-                  <p className="text-slate-300 mb-6 italic leading-relaxed">"{testimonial.text}"</p>
-                  <div className="flex items-center gap-4"><div className="text-4xl">{testimonial.image}</div><div><h4 className="font-bold text-accent-light">{testimonial.name}</h4><p className="text-xs text-slate-400">{testimonial.role}</p></div></div>
-                  <FM.motion.div initial={{ width: 0 }} whileInView={{ width: '100%' }} transition={{ duration: 0.8, delay: 0.2 }} viewport={{ once: true }} className="h-0.5 bg-gradient-to-r from-accent to-vibrant-pink mt-4" />
-                </div>
-              </FM.motion.div>
-            ))}
-          </FM.motion.div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="group">
-                <div className="glass-effect p-6 rounded-xl hover-glow hover-lift h-full transition-all">
-                  <div className="mb-4 flex gap-1">{[...Array(testimonial.rating)].map((_, i) => (<span key={i} className="text-lg text-accent">⭐</span>))}</div>
-                  <p className="text-slate-300 mb-6 italic leading-relaxed">"{testimonial.text}"</p>
-                  <div className="flex items-center gap-4"><div className="text-4xl">{testimonial.image}</div><div><h4 className="font-bold text-accent-light">{testimonial.name}</h4><p className="text-xs text-slate-400">{testimonial.role}</p></div></div>
-                  <div className="h-0.5 bg-gradient-to-r from-accent to-vibrant-pink mt-4" />
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {testimonials.map((testimonial, index) => (
+            <div key={index} className="group">
+              <div className="glass-effect p-6 rounded-xl hover-glow hover-lift h-full transition-all">
+                <div className="mb-4 flex gap-1">{[...Array(testimonial.rating)].map((_, i) => (<span key={i} className="text-lg text-accent">⭐</span>))}</div>
+                <p className="text-slate-300 mb-6 italic leading-relaxed">"{testimonial.text}"</p>
+                <div className="flex items-center gap-4"><div className="text-4xl">{testimonial.image}</div><div><h4 className="font-bold text-accent-light">{testimonial.name}</h4><p className="text-xs text-slate-400">{testimonial.role}</p></div></div>
+                <div className="h-0.5 bg-gradient-to-r from-accent to-vibrant-pink mt-4" />
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
 
         {/* Additional stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="text-center"
-        >
+        <div className="text-center">
           <div className="glass-effect-strong p-8 rounded-2xl inline-block">
             <div className="grid grid-cols-2 gap-8 md:gap-16">
               <div>
@@ -124,7 +91,7 @@ export default function Testimonials() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

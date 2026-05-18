@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from './Button';
 import Card from './Card';
 import Badge from './Badge';
@@ -7,7 +6,12 @@ export default function ProjectCard({ project }) {
   return (
     <Card className="overflow-hidden">
       <div className="h-40 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center overflow-hidden relative">
-        <img src={project.image} alt={project.alt || project.title} className="w-full h-full object-cover" loading="lazy" />
+        <picture>
+          {/* Try AVIF, then WebP, fall back to the original image */}
+          <source srcSet={project.image.replace(/\.[^.]+$/, '.avif')} type="image/avif" />
+          <source srcSet={project.image.replace(/\.[^.]+$/, '.webp')} type="image/webp" />
+          <img src={project.image} alt={project.alt || project.title} className="w-full h-full object-cover" loading="lazy" />
+        </picture>
       </div>
 
       <div className="p-6">
