@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { siteMeta } from '../data/siteData';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,9 +23,9 @@ export default function Navigation() {
             <div className="text-2xl">💻</div>
             <div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-accent to-vibrant-purple bg-clip-text text-transparent">
-                John Dev
+                {siteMeta.name}
               </h1>
-              <p className="text-xs text-slate-400">Full Stack Developer</p>
+              <p className="text-xs text-slate-400">{siteMeta.title}</p>
             </div>
           </div>
 

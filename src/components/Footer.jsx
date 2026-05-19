@@ -85,7 +85,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-slate-500 text-sm text-center md:text-left">
-              &copy; {currentYear} John Developer. All rights reserved.
+              &copy; {currentYear} Mandiga Chandra Bhanu. All rights reserved.
             </p>
             <p className="text-slate-500 text-sm">
               Designed & Built with{' '}

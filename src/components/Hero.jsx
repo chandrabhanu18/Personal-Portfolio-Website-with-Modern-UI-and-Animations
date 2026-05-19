@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Button from './ui/Button';
+import { siteMeta } from '../data/siteData';
 
 export default function Hero() {
   const [offset, setOffset] = useState(0);
@@ -36,7 +37,7 @@ export default function Hero() {
           {/* Main heading with gradient animation */}
           <div className="mb-6">
             <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text animate-gradient">
-              Hi, I'm John Developer
+              Hi, I'm {siteMeta.name}
             </h1>
             <div className="inline-block text-2xl text-accent">✨</div>
           </div>
@@ -44,7 +45,7 @@ export default function Hero() {
           {/* Subtitle with enhanced styling */}
           <div>
             <p className="text-xl md:text-2xl bg-gradient-to-r from-accent-light via-vibrant-green to-accent bg-clip-text text-transparent mb-6 font-semibold">
-              Full Stack Developer | Creative Problem Solver | Tech Innovator
+              {siteMeta.title} | Creative Problem Solver | Tech Innovator
             </p>
             <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
               I craft beautiful, responsive web experiences with cutting-edge technologies. 

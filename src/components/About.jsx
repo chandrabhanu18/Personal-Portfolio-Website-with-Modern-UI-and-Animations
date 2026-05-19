@@ -15,7 +15,7 @@ export default function About() {
               <picture>
                 <source srcSet="/avatar.avif" type="image/avif" />
                 <source srcSet="/avatar.webp" type="image/webp" />
-                <img src="/avatar.svg" alt="John Developer avatar" className="w-full h-full object-cover" loading="lazy" />
+                <img src="/avatar.svg" alt="Mandiga Chandra Bhanu avatar" className="w-full h-full object-cover" loading="lazy" />
               </picture>
             </div>
           </div>
