@@ -11,11 +11,7 @@ export default function About() {
           <div className="relative w-48 h-48 mx-auto md:mx-0">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-lg blur opacity-75"></div>
             <div className="relative w-full h-full bg-slate-800 rounded-lg flex items-center justify-center overflow-hidden">
-                <picture>
-                <source srcSet="/avatar.avif" type="image/avif" />
-                <source srcSet="/avatar.webp" type="image/webp" />
-                <img src="/avatar.svg" alt="Mandiga Chandra Bhanu avatar" className="w-full h-full object-cover" loading="lazy" width="384" height="384" />
-              </picture>
+              <img src="/avatar.svg" alt="Mandiga Chandra Bhanu avatar" className="w-full h-full object-cover" loading="lazy" width="384" height="384" />
             </div>
           </div>
 
