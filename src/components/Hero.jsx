@@ -47,6 +47,22 @@ export default function Hero() {
             <p className="text-xl md:text-2xl bg-gradient-to-r from-accent-light via-vibrant-green to-accent bg-clip-text text-transparent mb-6 font-semibold">
               {siteMeta.title} | Creative Problem Solver | Tech Innovator
             </p>
+            {/* LCP Hero image (responsive) */}
+            <div className="mt-8 mx-auto max-w-5xl">
+              <picture>
+                <source srcSet="/hero.avif" type="image/avif" />
+                <source srcSet="/hero.webp" type="image/webp" />
+                <img
+                  src="/hero.avif"
+                  alt="Hero background showing design & UI samples"
+                  width="1600"
+                  height="900"
+                  className="w-full h-auto rounded-2xl shadow-2xl"
+                  decoding="async"
+                  fetchpriority="high"
+                />
+              </picture>
+            </div>
             <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
               I craft beautiful, responsive web experiences with cutting-edge technologies. 
               Passionate about creating pixel-perfect designs and scalable solutions. 
