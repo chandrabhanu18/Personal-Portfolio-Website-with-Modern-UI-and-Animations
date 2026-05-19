@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 export default function Testimonials() {
   const testimonials = [
     {
@@ -32,27 +30,7 @@ export default function Testimonials() {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  useEffect(() => {}, []);
+  // animation variants removed (not used)
 
   return (
     <section className="py-20 px-4 relative overflow-hidden">

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// About content only — no hooks needed
 
 export default function About() {
 

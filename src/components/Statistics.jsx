@@ -32,27 +32,7 @@ export default function Statistics() {
     { label: 'Success Rate', value: counts.success, suffix: '%', icon: '✅' },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  useEffect(() => {}, []);
+  // animation variants removed (not used)
 
   return (
     <section className="py-20 px-4 relative overflow-hidden">

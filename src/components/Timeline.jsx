@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 export default function Timeline() {
   const milestones = [
     {
@@ -40,27 +38,7 @@ export default function Timeline() {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  useEffect(() => {}, []);
+  // animation variants removed (not used)
 
   return (
     <section className="py-20 px-4 relative overflow-hidden">
