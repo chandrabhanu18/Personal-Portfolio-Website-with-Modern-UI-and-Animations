@@ -11,4 +11,16 @@ export default defineConfig({
       ? visualizer({ filename: 'bundle-report.html', template: 'treemap', open: false, gzipSize: true, brotliSize: true })
       : null,
   ].filter(Boolean),
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) return 'react-vendor';
+            return 'vendor';
+          }
+        }
+      }
+    }
+  }
 })
