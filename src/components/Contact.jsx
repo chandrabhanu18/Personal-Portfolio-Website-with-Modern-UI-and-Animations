@@ -1,29 +1,16 @@
-import { useState } from 'react';
 import { siteMeta } from '../data/siteData';
 
+// The contact form is wired to Formspree for a simple no-backend setup.
+// Replace FORM_ID below with your Formspree form ID (see README or instructions).
+// Example action: https://formspree.io/f/mnqlvkjp
+const FORMSPREE_ACTION = 'https://formspree.io/f/mykvyrjo';
+
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: '', email: '', message: '' });
-      setSubmitted(false);
-    }, 3000);
-  };
-
   const contactLinks = [
     { name: 'Email', href: `mailto:${siteMeta.email}`, icon: '📧', label: siteMeta.email },
     { name: 'GitHub', href: siteMeta.github, icon: '🐙', label: siteMeta.github.replace('https://', '') },
     { name: 'LinkedIn', href: siteMeta.linkedin, icon: '💼', label: siteMeta.linkedin.replace('https://', '') },
-    { name: 'Twitter', href: 'https://twitter.com', icon: '🐦', label: '@yourhandle' },
+    { name: 'Twitter', href: siteMeta.twitter, icon: '🐦', label: siteMeta.twitter.replace('https://', '') },
   ];
 
   return (
@@ -37,15 +24,13 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form action={FORMSPREE_ACTION} method="POST" className="space-y-6" aria-label="Contact form">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 text-slate-100 transition-colors"
                   placeholder="Your name"
@@ -58,8 +43,6 @@ export default function Contact() {
                   type="email"
                   id="email"
                   name="email"
-                  value={formData.email}
-                  onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 text-slate-100 transition-colors"
                   placeholder="your@email.com"
@@ -71,8 +54,6 @@ export default function Contact() {
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   required
                   rows="5"
                   className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 text-slate-100 transition-colors resize-none"
@@ -82,10 +63,9 @@ export default function Contact() {
 
               <button
                 type="submit"
-                disabled={submitted}
-                className="w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-green-500 text-white font-semibold rounded-lg transition-all duration-300"
+                className="w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-all duration-300"
               >
-                {submitted ? '✓ Message Sent!' : 'Send Message'}
+                Send Message
               </button>
             </form>
           </div>
@@ -102,7 +82,9 @@ export default function Contact() {
                   className="block p-4 bg-slate-800/50 border border-slate-700 rounded-lg hover:border-blue-500/50 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="text-3xl">{link.icon}</span>
+                    <span className="text-3xl" aria-hidden>
+                      {link.icon}
+                    </span>
                     <div>
                       <p className="font-semibold text-slate-100">{link.name}</p>
                       <p className="text-slate-400 group-hover:text-blue-400 transition-colors">{link.label}</p>

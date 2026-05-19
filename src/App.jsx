@@ -8,8 +8,8 @@ const Projects = lazy(() => import('./components/Projects'));
 const Statistics = lazy(() => import('./components/Statistics'));
 const Timeline = lazy(() => import('./components/Timeline'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
 import './App.css';
 
 function App() {
@@ -17,6 +17,8 @@ function App() {
 
   return (
     <div className="bg-gradient-to-b from-primary via-secondary to-primary text-slate-100 min-h-screen overflow-hidden">
+      {/* Skip link for accessibility */}
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-blue-600 text-white px-3 py-2 rounded">Skip to main content</a>
       {/* Animated background elements (lazy) */}
       <Suspense fallback={null}>
         <LazyAnimatedBackground />
@@ -25,7 +27,8 @@ function App() {
       {/* Main content */}
       <div className="relative z-10">
         <Navigation />
-        <Hero />
+        <main id="main">
+          <Hero />
         <Suspense
           fallback={
             <div className="py-20">
@@ -40,8 +43,11 @@ function App() {
           <Timeline />
           <Testimonials />
         </Suspense>
-        <Contact />
-        <Footer />
+        <Suspense fallback={null}>
+          <Contact />
+          <Footer />
+        </Suspense>
+        </main>
       </div>
     </div>
   );

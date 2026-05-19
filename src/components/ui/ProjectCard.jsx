@@ -10,7 +10,8 @@ export default function ProjectCard({ project }) {
           {/* Try AVIF, then WebP, fall back to the original image */}
           <source srcSet={project.image.replace(/\.[^.]+$/, '.avif')} type="image/avif" />
           <source srcSet={project.image.replace(/\.[^.]+$/, '.webp')} type="image/webp" />
-          <img src={project.image} alt={project.alt || project.title} className="w-full h-full object-cover" loading="lazy" />
+          {/* Provide intrinsic size attributes to avoid layout shift; adjust sizes to your actual image dimensions */}
+          <img src={project.image} alt={project.alt || project.title} className="w-full h-full object-cover" loading="lazy" width="1200" height="675" />
         </picture>
       </div>
 
