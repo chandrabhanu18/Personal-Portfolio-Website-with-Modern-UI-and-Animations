@@ -1,8 +1,8 @@
 // Centralized site data: replace placeholders with real content
 export const siteMeta = {
   // Replace these example values with your real personal details
-  name: 'Mandiga Chandra Bhanu',
-  title: 'AI Engineer',
+  name: 'Mandiga chandra bhanu',
+  title: 'Ai engineer',
   email: 'mandigachandrabhanu@gmail.com',
   github: 'https://github.com/chandrabhanu18',
   linkedin: '',
