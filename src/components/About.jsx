@@ -1,5 +1,4 @@
-// About content only — no hooks needed
-
+// About component — no hooks required
 export default function About() {
 
   return (
