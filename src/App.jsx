@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import Navigation from './components/Navigation';
 const Hero = lazy(() => import('./components/Hero'));
 const LazyAnimatedBackground = lazy(() => import('./components/AnimatedBackground'));
@@ -13,16 +13,29 @@ const Footer = lazy(() => import('./components/Footer'));
 import './App.css';
 
 function App() {
-  // (cursor tracking removed — not currently used)
+  const [animateReady, setAnimateReady] = useState(false);
+
+  useEffect(() => {
+    // Defer mounting the animated background until idle to reduce initial work
+    if (typeof window === 'undefined') return;
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(() => setAnimateReady(true), { timeout: 1500 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const t = setTimeout(() => setAnimateReady(true), 1200);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <div className="bg-gradient-to-b from-primary via-secondary to-primary text-slate-100 min-h-screen overflow-hidden">
       {/* Skip link for accessibility */}
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-blue-600 text-white px-3 py-2 rounded">Skip to main content</a>
-      {/* Animated background elements (lazy) */}
-      <Suspense fallback={null}>
-        <LazyAnimatedBackground />
-      </Suspense>
+      {/* Animated background elements (lazy, mounted after idle) */}
+      {animateReady && (
+        <Suspense fallback={null}>
+          <LazyAnimatedBackground />
+        </Suspense>
+      )}
 
       {/* Main content */}
       <div className="relative z-10">

@@ -1,15 +1,35 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function AnimatedBackground() {
   const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
 
+  const [started, setStarted] = useState(false);
+
+  // Defer starting animations until the main thread is idle (or timeout), and respect reduced-motion
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduce) return;
 
+    let handle = null;
+    const start = () => setStarted(true);
+
+    if ('requestIdleCallback' in window) {
+      handle = window.requestIdleCallback(start, { timeout: 1500 });
+    } else {
+      handle = window.setTimeout(start, 1000);
+    }
+
+    return () => {
+      if ('cancelIdleCallback' in window && handle) window.cancelIdleCallback(handle);
+      else if (handle) window.clearTimeout(handle);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
     const a1 = ref1.current?.animate(
       [
         { transform: 'translate(0px, 0px)' },
@@ -42,7 +62,7 @@ export default function AnimatedBackground() {
       a2?.cancel();
       a3?.cancel();
     };
-  }, []);
+  }, [started]);
 
   // Respect reduced motion via early return in effect; render static structure otherwise
   return (
